@@ -6,7 +6,7 @@
 /*   By: mrochedy <mrochedy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:49:03 by mrochedy          #+#    #+#             */
-/*   Updated: 2024/09/28 16:02:00 by mrochedy         ###   ########.fr       */
+/*   Updated: 2024/09/29 17:05:43 by mrochedy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,21 @@
 # define VALID_CHARS "01CEPe"
 # define IMG_SIZE 64
 # define ESC_KEY 53
-# define w_KEY 13
 # define W_KEY 13
-# define a_KEY 0
 # define A_KEY 0
-# define d_KEY 2
 # define D_KEY 2
-# define s_KEY 1
 # define S_KEY 1
 # define LEFT_ARROW 123
 # define RIGHT_ARROW 124
 # define DOWN_ARROW 125
-# define TOP_ARROW 126
+# define UP_ARROW 126
 # define KEYPRESS 2
 # define KEYPRESSMASK 3
 # define DESTROYNOTIFY 17
 # define STRUCTURENOTIFYMASK 0
+
+// THIS PART ISN'T NORMED ACCORDING TO THE 42 NORMINETTE
+// BUT IS NECESSARY TO MAKE IT CROSS-COMPATIBLE
 # define DESTROY_DISPLAY(mlx_ptr)
 
 typedef struct s_imgs
@@ -59,7 +58,8 @@ typedef struct s_data
 	t_imgs	*imgs;
 }	t_data;
 
-typedef struct s_coord {
+typedef struct s_coord
+{
 	int	row;
 	int	col;
 }	t_coord;

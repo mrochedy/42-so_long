@@ -6,7 +6,7 @@
 /*   By: mrochedy <mrochedy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 10:28:05 by mrochedy          #+#    #+#             */
-/*   Updated: 2024/09/28 16:49:20 by mrochedy         ###   ########.fr       */
+/*   Updated: 2024/09/29 17:07:36 by mrochedy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ static int	handle_input(int keysym, t_game *game)
 	old_coord.col = game->pos->col;
 	if (keysym == ESC_KEY)
 		close_window(game);
-	else if (keysym == w_KEY || keysym == W_KEY || keysym == TOP_ARROW)
+	else if (keysym == W_KEY || keysym == UP_ARROW)
 		move_player(game, &old_coord, old_coord.row - 1, old_coord.col);
-	else if (keysym == a_KEY || keysym == A_KEY || keysym == LEFT_ARROW)
+	else if (keysym == A_KEY || keysym == LEFT_ARROW)
 		move_player(game, &old_coord, old_coord.row, old_coord.col - 1);
-	else if (keysym == d_KEY || keysym == D_KEY || keysym == RIGHT_ARROW)
+	else if (keysym == D_KEY || keysym == RIGHT_ARROW)
 		move_player(game, &old_coord, old_coord.row, old_coord.col + 1);
-	else if (keysym == s_KEY || keysym == S_KEY || keysym == DOWN_ARROW)
+	else if (keysym == S_KEY || keysym == DOWN_ARROW)
 		move_player(game, &old_coord, old_coord.row + 1, old_coord.col);
 	return (0);
 }

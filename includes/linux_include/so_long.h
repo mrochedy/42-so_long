@@ -6,7 +6,7 @@
 /*   By: mrochedy <mrochedy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:49:03 by mrochedy          #+#    #+#             */
-/*   Updated: 2024/09/28 14:49:46 by mrochedy         ###   ########.fr       */
+/*   Updated: 2024/09/29 17:05:34 by mrochedy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,21 @@
 # define VALID_CHARS "01CEPe"
 # define IMG_SIZE 64
 # define ESC_KEY XK_Escape
-# define w_KEY XK_w
-# define W_KEY XK_W
-# define a_KEY XK_a
-# define A_KEY XK_A
-# define d_KEY XK_d
-# define D_KEY XK_D
-# define s_KEY XK_s
-# define S_KEY XK_S
-# define LEFT_ARROW
-# define RIGHT_ARROW
-# define DOWN_ARROW
-# define TOP_ARROW
+# define W_KEY XK_w
+# define A_KEY XK_a
+# define D_KEY XK_d
+# define S_KEY XK_s
+# define LEFT_ARROW XK_Left
+# define RIGHT_ARROW XK_Right
+# define DOWN_ARROW XK_Down
+# define UP_ARROW XK_Up
 # define KEYPRESS KeyPress
 # define KEYPRESSMASK KeyPressMask
 # define DESTROYNOTIFY DestroyNotify
 # define STRUCTURENOTIFYMASK StructureNotifyMask
+
+// THIS PART ISN'T NORMED ACCORDING TO THE 42 NORMINETTE
+// BUT IS NECESSARY TO MAKE IT CROSS-COMPATIBLE
 # define DESTROY_DISPLAY(mlx_ptr) mlx_destroy_display(mlx_ptr)
 
 typedef struct s_imgs
@@ -61,7 +60,8 @@ typedef struct s_data
 	t_imgs	*imgs;
 }	t_data;
 
-typedef struct s_coord {
+typedef struct s_coord
+{
 	int	row;
 	int	col;
 }	t_coord;

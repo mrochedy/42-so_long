@@ -1,7 +1,7 @@
 NAME = so_long
 MACOS = so_long_macos
 
-MLX_MACOS = mlx_linux/libmlx.a
+MLX_LINUX = mlx_linux/libmlx.a
 MLX_MACOS = mlx_macos/libmlx.a
 
 CC = cc
