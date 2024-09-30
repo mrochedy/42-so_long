@@ -1,9 +1,9 @@
 /*
 ** mlx_new_image.c for MiniLibX in raytraceur
-** 
+**
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
-** 
+**
 ** Started on  Mon Aug 14 15:29:14 2000 Charlie Root
 ** Last update Wed May 25 16:46:31 2011 Olivier Crouzet
 */
@@ -23,8 +23,11 @@ int	mlx_X_error;
 
 int	shm_att_pb(Display *d,XErrorEvent *ev)
 {
+  ssize_t ret;
+
   if (ev->request_code==146 && ev->minor_code==X_ShmAttach)
-    write(2,WARN_SHM_ATTACH,strlen(WARN_SHM_ATTACH));
+    ret = write(2,WARN_SHM_ATTACH,strlen(WARN_SHM_ATTACH));
+  (void)ret;
   mlx_X_error = 1;
 }
 

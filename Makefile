@@ -6,7 +6,7 @@ MLX_MACOS = mlx_macos/libmlx.a
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 
 OBJS_DIR = objs
 
@@ -64,7 +64,7 @@ $(MLX_MACOS):
 
 $(NAME): $(OBJS)
 	@printf "\n$(YELLOW)Linking objects...$(RESET)\n"
-	@$(CC) $(CFLAGS) $(OBJS) -L$(MLX_PATH) -lmlx_Linux -L/usr/lib -I$(MLX_PATH) -lXext -lX11 -lm -lz -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
 	@echo "$(BLUE)Progress: 100%$(RESET)"
 	@printf "$(GREEN)Compilation complete!$(RESET)\n"
 	@printf "\n$(COL1)███████╗ ██████╗         ██╗      ██████╗ ███╗  ██╗ ██████╗ \n"
@@ -87,12 +87,13 @@ $(MACOS): $(OBJS)
 	@printf "$(COL6)╚══════╝ ╚═════╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚══╝ ╚═════╝ $(RESET)\n\n"
 
 clean:
+	@make -s clean -C mlx_linux
+	@make -s clean -C mlx_macos
 	@rm -rf $(OBJS_DIR)
 	@printf "$(RED)Cleaned object files.$(RESET)\n"
 
 fclean: clean
-	@make -s clean -C mlx_macos
-	@rm -f $(NAME) $(MACOS)
+	@rm -f $(NAME)
 	@printf "$(RED)Removed executable.$(RESET)\n"
 
 re: fclean all

@@ -13,7 +13,7 @@ logging(){
 	printf "${LIGHT_CYAN}${BOLD}configure${RESET} [%b] : %b\n" "$type" "$*"
 }
 log_info(){
-	logging "${LIGHT_GREEN}info${RESET}" "$@"
+	return
 }
 log_error(){
 	logging "${LIGHT_RED}error${RESET}" "$@" >&2
@@ -75,9 +75,9 @@ EOF
 
 clean(){
 	log_info 'Execute "make clean" from "makefile.gen"'
-	${MAKE} -f Makefile.gen clean
+	${MAKE} -f Makefile.gen -s clean
 	log_info 'Execute "make clean" from "test/makefile.gen"'
-	${MAKE} -f Makefile.gen -C test/ --no-print-directory clean
+	${MAKE} -f Makefile.gen -s -C test/ --no-print-directory clean
 }
 
 parse_args(){
@@ -111,16 +111,16 @@ main(){
 	log_info "Found X11 include path directory: $xlib_inc"
 
 	log_info 'Generate "makefile.gen" from template "makefile.mk"'
-		echo "INC=$xlib_inc"  	 	    	>  Makefile.gen 
+		echo "INC=$xlib_inc"  	 	    	>  Makefile.gen
 		cat Makefile.mk | grep -v %%%%  	>> Makefile.gen
 	log_info 'Generate "test/makefile.gen" from template "test/makefile.mk"'
 		echo "INC=$xlib_inc"				>  test/Makefile.gen
 		cat test/Makefile.mk | grep -v %%%% >> test/Makefile.gen
 
 	log_info 'Execute "make all" from file "makefile.gen"'
-		${MAKE} -f Makefile.gen all
+		${MAKE} -f Makefile.gen -s all
 	log_info 'Execute "make all" from file "test/makefile.gen"'
-		(cd test ; ${MAKE} -f Makefile.gen all )
+		(cd test ; ${MAKE} -f Makefile.gen -s all )
 }
 
 main "$@"
