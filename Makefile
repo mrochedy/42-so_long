@@ -93,7 +93,7 @@ clean:
 	@printf "$(RED)Cleaned object files.$(RESET)\n"
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(MACOS)
 	@printf "$(RED)Removed executable.$(RESET)\n"
 
 re: fclean all
