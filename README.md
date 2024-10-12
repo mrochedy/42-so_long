@@ -4,9 +4,11 @@ Welcome to my repository of **so_long**, a 2D game project I developed as part o
 
 This version of **so_long** is designed to be **cross-compatible** between **Linux** and **macOS**, making it easy to run on both operating systems. In this repository, you'll find everything you need to compile and play the game on either platform. Even though it was carefully crafted and was evaluated by three different students, errors may still exist. Your feedback is highly appreciated!
 
+<img width="198" alt="115/100 grade" src="https://github.com/user-attachments/assets/60b65ad4-55a9-4582-b631-76a0ecc6751d">
+
 ## About the Project
 
-**So_long** is a fundamental project in the 42 curriculum that introduces students to basic game development concepts using **C** and the **MiniLibX** graphics library. The goal of the game is simple: guide your character through a maze, collect all the items, and find the exit while avoiding obstacles. This version of **so_long** includes some additional features to enhance the experience, like enemies and a real-time move counter in the game window.
+**so_long** is a fundamental project in the 42 curriculum that introduces students to basic game development concepts using **C** and the **MiniLibX** graphics library. The goal of the game is simple: guide your character through a maze, collect all the items, and find the exit while avoiding obstacles. This version of **so_long** includes some additional features to enhance the experience, like enemies and a real-time move counter in the game window.
 
 This project was developed by **Maxime Rochedy**, under the login **mrochedy**, as part of the 42 common core curriculum. The goal of so_long is to make developers discover graphics libraries and games for the first time with a simple and straightforward game.
 
