@@ -16,6 +16,10 @@ Please note that while this code is provided for **learning purposes**, you shou
 
 ## Getting started
 
+This project is compatible on Linux and macOS.
+
+> If you are on macOS, make sure you have installed Xcode Command Line Tools.
+
 To play the game, first clone the repository like so:
 
 ```bash
@@ -23,18 +27,12 @@ git clone https://github.com/mrochedy/42-so_long.git
 cd 42-so_long
 ```
 
-To make sure my game was **cross-compatible**, in order to be playable both on Linux and MacOS, different commands are needed depending on your platform.
+Then build and launch the game:
 
-- **Linux**:
-  ```bash
-  make
-  ./so_long [map_file.ber]
-  ```
-- **macOS**:
-  ```bash
-  make macos
-  ./so_long_macos [map_file.ber]
-  ```
+```bash
+make
+./so_long [map_file.ber]
+```
 
 The map file should be in the `.ber` format, as required by the **so_long** specifications. A `maps` folder is present at the root of the repository and contains many different maps to test the game with.
 
@@ -42,10 +40,11 @@ The map file should be in the `.ber` format, as required by the **so_long** spec
 
 Maps must conform to the **so_long** project specifications, which are the following:
 
-- The map must contain **exactly 1 exit**, **1 starting position** and **at least 1 collectible**.
+- The map must contain **exactly 1 exit** (`E`), **1 starting position** (`P`) and **at least 1 collectible** (`C`).
 - The map must be **rectangular**.
-- The map must be **closed/surrounded by walls**.
+- The map must be **closed/surrounded by walls** (`1`).
 - There has to be a **valid path** in the map.
+- The map can contain **empty squares** (`0`) and **enemies** (`e`).
 
 My `maps` folder contains some invalid maps, for testing purposes. Custom maps can be created for more challenging gameplay, just be sure they follow the rules of the **so_long** project.
 

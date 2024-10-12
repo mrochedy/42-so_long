@@ -1,5 +1,4 @@
 NAME = so_long
-MACOS = so_long_macos
 
 MLX_LINUX = mlx_linux/libmlx.a
 MLX_MACOS = mlx_macos/libmlx.a
@@ -7,6 +6,21 @@ MLX_MACOS = mlx_macos/libmlx.a
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
+
+INCLUDES = -Iincludes
+
+UNAME_S = $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+    INCLUDES += -Imlx_linux -Iincludes/linux_include
+    LDFLAGS = -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
+    MLX = $(MLX_LINUX)
+else ifeq ($(UNAME_S), Darwin)
+    INCLUDES += -Imlx_macos -Iincludes/macos_include
+    LDFLAGS = -Lmlx_macos -lmlx -framework OpenGL -framework AppKit
+    MLX = $(MLX_MACOS)
+else
+    $(error Operating system not supported)
+endif
 
 OBJS_DIR = objs
 
@@ -42,17 +56,11 @@ COL4 = \033[38;2;255;234;115m # Jaune-orangé pastel
 COL5 = \033[38;2;255;244;102m # Jaune clair pastel
 COL6 = \033[38;2;255;255;153m # Jaune pastel
 
-INCLUDES = -Iincludes
-
-all: INCLUDES += -Imlx_linux -Iincludes/linux_include
-macos: INCLUDES += -Imlx_macos -Iincludes/macos_include
-
-all: $(MLX_LINUX) $(NAME)
-macos: $(MLX_MACOS) $(MACOS)
+all: $(MLX) $(NAME)
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@printf "$(CYAN)Compiling $<...$(RESET)\n"
+	@echo "$(CYAN)Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(MLX_LINUX):
@@ -63,41 +71,28 @@ $(MLX_MACOS):
 	@make -s -C mlx_macos
 
 $(NAME): $(OBJS)
-	@printf "\n$(YELLOW)Linking objects...$(RESET)\n"
-	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
+	@echo "\n$(YELLOW)Linking objects...$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(BLUE)Progress: 100%$(RESET)"
-	@printf "$(GREEN)Compilation complete!$(RESET)\n"
-	@printf "\n$(COL1)███████╗ ██████╗         ██╗      ██████╗ ███╗  ██╗ ██████╗ \n"
-	@printf "$(COL2)██╔════╝██╔═══██╗        ██║     ██╔═══██╗████╗ ██║██╔════╝ \n"
-	@printf "$(COL3)███████╗██║   ██║        ██║     ██║   ██║██╔██╗██║██║  ███╗\n"
-	@printf "$(COL4)╚════██║██║   ██║        ██║     ██║   ██║██║╚████║██║   ██║\n"
-	@printf "$(COL5)███████║╚██████╔╝███████╗███████╗╚██████╔╝██║ ╚███║╚██████╔╝\n"
-	@printf "$(COL6)╚══════╝ ╚═════╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚══╝ ╚═════╝ $(RESET)\n\n"
-
-$(MACOS): $(OBJS)
-	@printf "\n$(YELLOW)Linking objects...$(RESET)\n"
-	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_macos -lmlx -framework OpenGL -framework AppKit -o $(MACOS)
-	@echo "$(BLUE)Progress: 100%$(RESET)"
-	@printf "$(GREEN)Compilation complete!$(RESET)\n"
-	@printf "\n$(COL1)███████╗ ██████╗         ██╗      ██████╗ ███╗  ██╗ ██████╗ \n"
-	@printf "$(COL2)██╔════╝██╔═══██╗        ██║     ██╔═══██╗████╗ ██║██╔════╝ \n"
-	@printf "$(COL3)███████╗██║   ██║        ██║     ██║   ██║██╔██╗██║██║  ███╗\n"
-	@printf "$(COL4)╚════██║██║   ██║        ██║     ██║   ██║██║╚████║██║   ██║\n"
-	@printf "$(COL5)███████║╚██████╔╝███████╗███████╗╚██████╔╝██║ ╚███║╚██████╔╝\n"
-	@printf "$(COL6)╚══════╝ ╚═════╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚══╝ ╚═════╝ $(RESET)\n\n"
+	@echo "$(GREEN)Compilation complete!$(RESET)\n"
+	@echo "$(COL1)███████╗ ██████╗         ██╗      ██████╗ ███╗  ██╗ ██████╗ "
+	@echo "$(COL2)██╔════╝██╔═══██╗        ██║     ██╔═══██╗████╗ ██║██╔════╝ "
+	@echo "$(COL3)███████╗██║   ██║        ██║     ██║   ██║██╔██╗██║██║  ███╗"
+	@echo "$(COL4)╚════██║██║   ██║        ██║     ██║   ██║██║╚████║██║   ██║"
+	@echo "$(COL5)███████║╚██████╔╝███████╗███████╗╚██████╔╝██║ ╚███║╚██████╔╝"
+	@echo "$(COL6)╚══════╝ ╚═════╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚══╝ ╚═════╝ $(RESET)\n"
 
 clean:
 	@make -s clean -C mlx_linux
 	@make -s clean -C mlx_macos
+	@echo "$(RED)Cleaned the MLX library.$(RESET)"
 	@rm -rf $(OBJS_DIR)
-	@printf "$(RED)Cleaned object files.$(RESET)\n"
+	@echo "$(RED)Cleaned object files.$(RESET)"
 
 fclean: clean
-	@rm -f $(NAME) $(MACOS)
-	@printf "$(RED)Removed executable.$(RESET)\n"
+	@rm -f $(NAME)
+	@echo "$(RED)Removed executable.$(RESET)"
 
 re: fclean all
 
-re_macos: fclean macos
-
-.PHONY: all clean fclean re macos re_macos
+.PHONY: all clean fclean re
